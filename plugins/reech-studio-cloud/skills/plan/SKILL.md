@@ -1,0 +1,53 @@
+---
+name: plan
+description: Phase 2 of Reech Video Studio. Decide what a video is for and how to plan it, then produce its script and production plan (shots, format and style, deliverables per platform). Works for any kind of video (brand campaign, teaching, entertainment, news, story, opinion, launch, anything new) through library playbooks; drafts a new playbook when none fits. Use when the next step is deciding what video to make or writing its script.
+allowed-tools: mcp__reech-studio__me, mcp__reech-studio__brands_list, mcp__reech-studio__brand_get, mcp__reech-studio__campaign_get, mcp__reech-studio__video_get, mcp__reech-studio__file_get, mcp__reech-studio__library_search, mcp__reech-studio__activity, mcp__reech-studio__posts_list, mcp__reech-studio__locks_list, mcp__reech-studio__media_list, mcp__reech-studio__media_links, mcp__reech-studio__job_get, mcp__reech-studio__job_wait, mcp__reech-studio__jobs_list, mcp__reech-studio__lock_acquire, mcp__reech-studio__lock_release, mcp__reech-studio__file_put, mcp__reech-studio__log_append, mcp__reech-studio__brand_save, mcp__reech-studio__campaign_save, mcp__reech-studio__video_save, mcp__reech-studio__media_upload_links, mcp__reech-studio__media_stats, mcp__reech-studio__media_transcribe, mcp__reech-studio__media_beats, mcp__reech-studio__video_stills, mcp__reech-studio__video_proxy
+---
+
+# Plan: from an idea (or a goal) to a production plan
+
+Needs an onboarded brand (otherwise run `gather` first). Videos live under a campaign; a campaign can also be a series ("weekly explainers") or a one-off.
+
+## 1. What is this video for?
+
+Don't assume it's a brand campaign. From what the person said, work out, and ask only what's missing (one short message):
+- **The job** for the viewer: teach, entertain, inform, sell or launch, tell a story, give an opinion, show behind the scenes, start a conversation… or a mix, or something new.
+- **What they bring:** an open goal (find the angle for me), a topic, an idea, a model video, raw material (a recording, a talk, a demo).
+- **References:** when they point to someone else's video ("algo como el de…"), look for it in the inspiration library (`library_search` with `type: inspiration`) and read its `breakdown.md` with `file_get`; borrow its structure and techniques, never its footage, music or script. Record it in `script.json → references`. (Measuring a new reference video is a Reech-side tool for now; ask the team to add it to the inspiration library.)
+- **How they want to work:** propose and let them pick, iterate together line by line, or go ahead on your own. Follow their answer over any default.
+
+## 2. Pick the playbook (or make one)
+
+A playbook is the library's guide for one kind of video: what good looks like, what to work out before writing, where the person's input matters, the usual structure, and the self-check. `library_search` with `type: playbook`, then `file_get` the matching `library/playbooks/<id>/guide.md`.
+- **One fits:** follow it. A mix (a funny explainer) → follow the main one and borrow from the other.
+- **None fits:** don't force the closest one. Draft a playbook for this kind of video with the person in a few lines: the job and what makes it good, who the viewer is and what they bring, what to work out before writing, where the person's input matters, a usual structure, a self-check. Use it for this video. Saving it to the shared library is a Reech-side step: hand the draft to the team (paste it in the answer) so they add it for everyone.
+- **Improve as you go:** when a person's corrections are about one brand's taste, put them in that brand's `system/writing.md` (`file_put`). When they would improve the playbook for everyone, tell the team.
+
+The brand's `system/writing.md` (if it exists) wins over the playbook. Read it before writing.
+
+## 3. Checkpoints
+
+The playbook says where the person's input makes the video better (a pick, a back-and-forth, one look at the script). Use those, and no others, unless the person asked to work differently in step 1. When a step is a choice among options and `system.json → autonomy` is `"auto"`, make the choice yourself and say why in one line. `/reech-studio-cloud:approve` records the person's approval of a script.
+
+## 4. Production plan (every kind of video)
+
+**Before writing it, test the premise:** say the video in one line, without the visuals. If that line isn't interesting on its own, change the idea: great footage can't save a boring premise, but a good premise survives simple footage. Also write in one line which part of the brand's positioning this video builds (`script.json → builds`).
+
+Save the script with `video_save` (`brand`, `campaign`, `video` folder name in lowercase-with-dashes, `script`): `profile` (`studio/brands/<slug>/system/profile.json`), `playbook`, `concept`, `format`, `objective`, `engagement`, `hook_type`, `beats[] {id, vo, card/shot notes}`, `facts_checked {claim: source}`, `footage[]` (paths under `brands/<slug>/` or `library/`, relative to `media/`), plus whatever the playbook adds. Look at an existing video's `script.json` (`video_get`) for the shape. Then:
+
+- **Voice-led or picture-led?** Decide first.
+  - **Voice-led** (explainers, listicles, a brand's series): the voice is the spine; on-screen text and footage illustrate the line being spoken. Write for the ear: short sentences, the local language and dialect, the brand's voice direction.
+  - **Picture-led** (commercials, brand films, stories, anything shot or generated as scenes): write the film first, shot by shot, as if it had no voice. Then add only the few lines that say what the picture can't: about 1.5 words a second at most, planned silences (`script.json → max_voiceless_gap_s`, with the reason), and no line that describes what's on screen.
+  - Length from the playbook, the platform plan or the model video; otherwise 20–40 s.
+- **The voice is chosen for this piece.** With ElevenLabs enabled, the brand's profile voice only when the playbook or the person says it fits; otherwise `script.json → voice {voice_id, name, why}` overrides the profile. Without ElevenLabs, the plan names who records it and how (`script.json → voice_source: "recording"`), and the recording is transcribed in `make`.
+- **Hook** in the first second, in both the words and the picture. Pick it from the hook catalog (`library_search` with `type: hook`: each entry has the feeling, the question, how to make it, whether it works muted, and example references); combine two when it helps. Testing rules (rulebook `research-testing`; follow them by default, break them on purpose when the idea needs it, and say so): the hook makes the viewer feel something and leaves a question (RT-05); it opens broad and narrows in the middle and CTA (RT-06); the brand is recognizable within 2 s, in the scene, spoken or by sound, not a bare logo (RT-01, `script.json → brand_cues [{t, asset, kind}]`). **CTA** that asks for the action the video is after.
+- **Feeling and showmanship** (RT-02/03/04): name the feeling the video builds (`script.json → feeling`); count people, place, story, dialogue and melody against voice-over monologue, wall-to-wall text, fast montage and abstract product shots (`showmanship {right, left}`); let the first on-screen text frame how to watch rather than cover the video. The brand's recurring device, if it has one, goes in `brand_device` (RT-07).
+- **One test when it's cheap.** If a testing rule is in question for this brand and the video can carry two variants, plan one: `script.json → test {rule, a, b}`. Learn compares them. Don't test more than one thing per video.
+- **Rotation:** check `posts_list` and `history.json` so the same device, hook or phrase isn't repeated too soon.
+- **Shots:** what each beat needs, marking what already exists (`media_list` for the brand; `library_search` with `type: media` for shared stock) and what must be sourced, uploaded or generated.
+- **Format × style:** the format that fits (`library_search` with `type: format`, read its manifest and config type with `file_get`), and a look that fits the piece. A brand's series style belongs to that series. For other pieces take the brand's essentials and let the piece's own look lead; the brand serves the piece, it doesn't cover it. If it needs something the library doesn't have, say so: new formats, styles and components are a Reech-side step (ask the team); `make` works with what the library offers.
+- **Deliverables per platform** (`library_search` with `type: platform`): aspect ratios, lengths and cutdowns, cover frame, caption file, A/B hook variants if a test is worth running.
+
+- **Walk it in 3-second blocks, as the viewer.** Before anything is produced, go through the script and shots three seconds at a time as someone who doesn't care yet: what do I see and hear, do I care, and what makes me want the next three seconds? Rewrite any block that fails. Write the walk in `script.json → viewer_walk` (`[{t: "0-3", sees, hears, why_stay}]`), and show it with the script when the playbook has a script checkpoint. Write the hook in `script.json → hook {ids, emotion, question}`.
+
+Fact-check every claim before any money is spent on audio. Then hand over to `make`.

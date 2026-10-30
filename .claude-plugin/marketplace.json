@@ -1,0 +1,15 @@
+{
+  "name": "reech-studio",
+  "description": "Reech Video Studio for Claude: make social and campaign videos for your brands with the studio in the cloud",
+  "owner": {
+    "name": "Reech AI",
+    "email": "yombell@reechai.com"
+  },
+  "plugins": [
+    {
+      "name": "reech-studio-cloud",
+      "source": "./plugins/reech-studio-cloud",
+      "description": "Make social and campaign videos for your brands with Reech Studio in the cloud: gather context, plan and write, make (previews, render, checks) and learn from results. No files, no commands: everything runs through the Reech Studio connector."
+    }
+  ]
+}

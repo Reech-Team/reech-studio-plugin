@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "reech-studio": {
+      "type": "http",
+      "url": "https://i1sn7pnowg.execute-api.us-east-2.amazonaws.com/mcp"
+    }
+  }
+}
