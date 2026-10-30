@@ -1,7 +1,7 @@
 ---
 name: studio
 description: Start here for any Reech video work. Covers making a social or campaign video, reel, TikTok, Short, ad or podcast clip for any brand, and deciding which phase (gather, plan, make, learn) comes next. Use when the user mentions videos, content for a brand, a campaign, or Reech Studio.
-allowed-tools: mcp__reech-studio__me, mcp__reech-studio__brands_list, mcp__reech-studio__brand_get, mcp__reech-studio__campaign_get, mcp__reech-studio__video_get, mcp__reech-studio__file_get, mcp__reech-studio__library_search, mcp__reech-studio__activity, mcp__reech-studio__posts_list, mcp__reech-studio__locks_list, mcp__reech-studio__media_list, mcp__reech-studio__media_links, mcp__reech-studio__job_get, mcp__reech-studio__job_wait, mcp__reech-studio__jobs_list, mcp__reech-studio__lock_acquire, mcp__reech-studio__lock_release
+allowed-tools: mcp__reech-studio__me, mcp__reech-studio__brands_list, mcp__reech-studio__brand_get, mcp__reech-studio__campaign_get, mcp__reech-studio__video_get, mcp__reech-studio__file_get, mcp__reech-studio__library_search, mcp__reech-studio__activity, mcp__reech-studio__posts_list, mcp__reech-studio__locks_list, mcp__reech-studio__media_list, mcp__reech-studio__media_links, mcp__reech-studio__job_get, mcp__reech-studio__job_wait, mcp__reech-studio__jobs_list, mcp__reech-studio__lock_acquire, mcp__reech-studio__lock_release, mcp__reech-studio__media_view, mcp__reech-studio__media_upload_page
 ---
 
 # Reech Video Studio (cloud)
@@ -29,7 +29,8 @@ There are no files on this computer, no commands and nothing to install. Brands,
 | Any other text file (library guides, rules, research) | `file_get`, `file_put` (pass the etag you read), `log_append` for `.jsonl` logs |
 | The shared library (formats, styles, playbooks, hooks, rules, recipes, sfx, stock) | `library_search` |
 | A brand's media; measure, transcribe, beat grid | `media_list`, `media_stats`, `media_transcribe`, `media_beats` |
-| Upload or download media | `media_upload_links`, `media_links` |
+| Break down a video someone shares; look at stored images | `media_analyze`, `media_view` |
+| Receive files from a person (give them the page), download media | `media_upload_page`, `media_links` |
 | Voice-over for a script (organizations with ElevenLabs) | `video_audio` |
 | Look at the video: frames, a low-res cut | `video_stills`, `video_proxy` |
 | Final render, checks, delivery | `video_render`, `video_qa`, `video_audit`, `video_deliver` |

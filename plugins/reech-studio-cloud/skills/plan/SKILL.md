@@ -1,7 +1,7 @@
 ---
 name: plan
 description: Phase 2 of Reech Video Studio. Decide what a video is for and how to plan it, then produce its script and production plan (shots, format and style, deliverables per platform). Works for any kind of video (brand campaign, teaching, entertainment, news, story, opinion, launch, anything new) through library playbooks; drafts a new playbook when none fits. Use when the next step is deciding what video to make or writing its script.
-allowed-tools: mcp__reech-studio__me, mcp__reech-studio__brands_list, mcp__reech-studio__brand_get, mcp__reech-studio__campaign_get, mcp__reech-studio__video_get, mcp__reech-studio__file_get, mcp__reech-studio__library_search, mcp__reech-studio__activity, mcp__reech-studio__posts_list, mcp__reech-studio__locks_list, mcp__reech-studio__media_list, mcp__reech-studio__media_links, mcp__reech-studio__job_get, mcp__reech-studio__job_wait, mcp__reech-studio__jobs_list, mcp__reech-studio__lock_acquire, mcp__reech-studio__lock_release, mcp__reech-studio__file_put, mcp__reech-studio__log_append, mcp__reech-studio__brand_save, mcp__reech-studio__campaign_save, mcp__reech-studio__video_save, mcp__reech-studio__media_upload_links, mcp__reech-studio__media_stats, mcp__reech-studio__media_transcribe, mcp__reech-studio__media_beats, mcp__reech-studio__video_stills, mcp__reech-studio__video_proxy
+allowed-tools: mcp__reech-studio__me, mcp__reech-studio__brands_list, mcp__reech-studio__brand_get, mcp__reech-studio__campaign_get, mcp__reech-studio__video_get, mcp__reech-studio__file_get, mcp__reech-studio__library_search, mcp__reech-studio__activity, mcp__reech-studio__posts_list, mcp__reech-studio__locks_list, mcp__reech-studio__media_list, mcp__reech-studio__media_links, mcp__reech-studio__job_get, mcp__reech-studio__job_wait, mcp__reech-studio__jobs_list, mcp__reech-studio__lock_acquire, mcp__reech-studio__lock_release, mcp__reech-studio__file_put, mcp__reech-studio__log_append, mcp__reech-studio__brand_save, mcp__reech-studio__campaign_save, mcp__reech-studio__video_save, mcp__reech-studio__media_upload_links, mcp__reech-studio__media_stats, mcp__reech-studio__media_transcribe, mcp__reech-studio__media_beats, mcp__reech-studio__video_stills, mcp__reech-studio__video_proxy, mcp__reech-studio__media_view, mcp__reech-studio__media_upload_page, mcp__reech-studio__media_analyze
 ---
 
 # Plan: from an idea (or a goal) to a production plan
@@ -13,8 +13,23 @@ Needs an onboarded brand (otherwise run `gather` first). Videos live under a cam
 Don't assume it's a brand campaign. From what the person said, work out, and ask only what's missing (one short message):
 - **The job** for the viewer: teach, entertain, inform, sell or launch, tell a story, give an opinion, show behind the scenes, start a conversation… or a mix, or something new.
 - **What they bring:** an open goal (find the angle for me), a topic, an idea, a model video, raw material (a recording, a talk, a demo).
-- **References:** when they point to someone else's video ("algo como el de…"), look for it in the inspiration library (`library_search` with `type: inspiration`) and read its `breakdown.md` with `file_get`; borrow its structure and techniques, never its footage, music or script. Record it in `script.json → references`. (Measuring a new reference video is a Reech-side tool for now; ask the team to add it to the inspiration library.)
+- **References:** when they point to someone else's video ("algo como el de…"), look for it in the inspiration library (`library_search` with `type: inspiration`) and read its `breakdown.md` with `file_get`; borrow its structure and techniques, never its footage, music or script. Record it in `script.json → references`. (A new video they share: see **Analyze a video they share** below.)
 - **How they want to work:** propose and let them pick, iterate together line by line, or go ahead on your own. Follow their answer over any default.
+
+## Analyze a video they share
+
+When someone shares a video ("analiza este video", "quiero uno como este"), work it out this way, with no checkpoint before the breakdown. Answer in their language.
+
+1. **Get the file:** `media_upload_page` with the brand and `folder: "references"`. Send the link and wait. A link to a social post can't be read: ask for the file or a screen recording. Confirm it arrived with `media_list`.
+2. **Measure:** `media_analyze` with the path and, if known, `kind`, `language` and `source`. `job_wait` until done; it returns the contact sheet as an image plus the pacing and the transcript. Full data, shot by shot: `file_get` on `brands/<slug>/references/<id>/analysis.json`.
+3. **Look:** `media_view` on `frames/first.jpg` (is the hook on screen at 0?) and on the frames of each shot, in batches of up to 8. Never describe a frame you haven't seen.
+4. **Read the context:** the job for the viewer, audience, offer and claims, the hook (catalog ids from `library_search` with `type: hook`), the structure with times, tone, voice, music role, CTA.
+5. **Read the design:** framing and camera per shot, on-screen text (font feel, size, position, when it lands), captions, colors, graphics, transitions, the rhythm of the cuts, and how the brand appears. Tie each thing to a moment.
+6. **Write it down:** the `read` in `analysis.json` (`file_put` with its etag) and a short `breakdown.md` next to it: one-line summary, structure with times, the design, what to borrow, what won't transfer. It stays in this brand's folders; it never goes in the shared library.
+7. **Show it** in a few lines and ask what to keep. Then map it: the closest format and style from the library and how each design element is set in them. If something can't be built with what exists (a new layout or animation), say so plainly, offer the closest version, and tell them the team can build the rest.
+8. **Plan the new video** from their new context and assets with the normal flow below, recording the reference id in `script.json → references`.
+
+Their own brand's video may be reused as footage if they say so (list it in `assets/index.json`). Someone else's video is inspiration only: its structure and techniques, never its footage, music or script.
 
 ## 2. Pick the playbook (or make one)
 

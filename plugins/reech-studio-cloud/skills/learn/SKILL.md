@@ -1,7 +1,7 @@
 ---
 name: learn
 description: Phase 4 of Reech Video Studio. Log what was posted, bring in results from any source (analytics exports, screenshots, dashboards, notes), link them to each video's creative attributes, and update the brand's rules and notes. Use when the user shares results, says a video was posted, or asks what's working for a brand.
-allowed-tools: mcp__reech-studio__me, mcp__reech-studio__brands_list, mcp__reech-studio__brand_get, mcp__reech-studio__campaign_get, mcp__reech-studio__video_get, mcp__reech-studio__file_get, mcp__reech-studio__library_search, mcp__reech-studio__activity, mcp__reech-studio__posts_list, mcp__reech-studio__locks_list, mcp__reech-studio__media_list, mcp__reech-studio__media_links, mcp__reech-studio__job_get, mcp__reech-studio__job_wait, mcp__reech-studio__jobs_list, mcp__reech-studio__lock_acquire, mcp__reech-studio__lock_release, mcp__reech-studio__log_append, mcp__reech-studio__file_put, mcp__reech-studio__brand_save
+allowed-tools: mcp__reech-studio__me, mcp__reech-studio__brands_list, mcp__reech-studio__brand_get, mcp__reech-studio__campaign_get, mcp__reech-studio__video_get, mcp__reech-studio__file_get, mcp__reech-studio__library_search, mcp__reech-studio__activity, mcp__reech-studio__posts_list, mcp__reech-studio__locks_list, mcp__reech-studio__media_list, mcp__reech-studio__media_links, mcp__reech-studio__job_get, mcp__reech-studio__job_wait, mcp__reech-studio__jobs_list, mcp__reech-studio__lock_acquire, mcp__reech-studio__lock_release, mcp__reech-studio__log_append, mcp__reech-studio__file_put, mcp__reech-studio__brand_save, mcp__reech-studio__media_view, mcp__reech-studio__media_upload_page
 ---
 
 # Learn: results change the next plan
