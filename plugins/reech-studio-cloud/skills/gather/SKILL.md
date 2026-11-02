@@ -48,7 +48,7 @@ Search the web for the brand's market and category: news in the last 2–4 weeks
 ## 5. Calibrate a new brand once (the one human checkpoint)
 
 A brand without `system/profile.json → calibrated` needs its sound decided:
-- **Organizations with ElevenLabs** (`me` → flags.eleven): write a short sample script in the brand's voice as a temporary video (`video_save` into `campaigns/<id>/videos/calibration/` with 2–3 candidate `voice` choices, one `video_audio` job each), give the person the audio links from `media_links`, and let them pick a voice and whether music belongs. Write the picks into `profile.voice` / `profile.music` / `profile.mix` with `calibrated: <date>`; delete the calibration video's files afterwards.
+- **Organizations with ElevenLabs** (`me` → flags.eleven): write a short sample script in the brand's voice as a temporary video (`video_save` into `campaigns/<id>/videos/calibration/` with 2–3 candidate `voice` choices from `voices_list`, one `video_audio` job each; ask first whether they already have voices they want, such as clones of their own people), give the person the audio links from `media_links`, and let them pick a voice and whether music belongs. Write the picks into `profile.voice` / `profile.music` / `profile.mix` with `calibrated: <date>`; delete the calibration video's files afterwards.
 - **Organizations without ElevenLabs:** they bring recordings or a talent. Record who speaks, how, and the mix levels in `profile`; `calibrated` means "we know the sound".
 
 ## Done when

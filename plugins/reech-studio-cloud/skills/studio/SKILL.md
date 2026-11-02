@@ -31,15 +31,25 @@ There are no files on this computer, no commands and nothing to install. Brands,
 | A brand's media; measure, transcribe, beat grid | `media_list`, `media_stats`, `media_transcribe`, `media_beats` |
 | Break down a video someone shares; look at stored images | `media_analyze`, `media_view` |
 | Receive files from a person (give them the page), download media | `media_upload_page`, `media_links` |
-| Voice-over for a script (organizations with ElevenLabs) | `video_audio` |
+| Voice-over for a script (organizations with ElevenLabs) | `voices_list` to choose, `video_audio` |
 | Look at the video: frames, a low-res cut | `video_stills`, `video_proxy` |
 | Final render, checks, delivery | `video_render`, `video_qa`, `video_audit`, `video_deliver` |
 | Jobs: wait for a result, progress, links, the contact sheet as an image | `job_wait`, `job_get`, `jobs_list` |
 | Who is editing what, recent changes, the posts log | `lock_acquire`, `locks_list`, `activity`, `posts_list` |
 
-Every heavy step returns a **job**: call `job_wait` (it waits up to 20 s on the server) until the status is `done` or `failed`, read its `error` when it fails, and look at the images it returns (stills and QA sheets come back as pictures: look at them, don't describe them from the numbers). `video_get` returns an etag per file (`etags.script`, `etags.config`, `etags.review`…): pass them to `video_save`.
+Every heavy step returns a **job**: call `job_wait` (it waits up to 24 s on the server) until the status is `done` or `failed`, read its `error` when it fails, and look at the images it returns (stills and QA sheets come back as pictures: look at them, don't describe them from the numbers). `video_get` returns an etag per file (`etags.script`, `etags.config`, `etags.review`…): pass them to `video_save`.
 
 If the connector isn't connected, say so: the person adds it from the plugin (it asks them to sign in with their Reech Studio account, email + password or Google). Someone without an organization asks Reech to be added; there is no self sign-up.
+
+## Keep it light
+
+Everything a tool returns stays in the conversation and counts again on every later turn, and the person's Claude plan has a limit. Running out in the middle of a video is a failure of this work, so:
+
+- **One video per conversation.** Everything is saved in Studio, so nothing is lost: when a video is finished, tell the person to open a new chat for the next one. If they ask for another in a long conversation, suggest it first.
+- **Read once.** Don't call `brand_get`, `campaign_get` or `video_get` again for something you already read, unless an etag conflict says it changed.
+- **Look only at what changed.** A contact sheet costs about 3,000 tokens. Use the full sheet once; after a small edit, ask for just the `times` it touched.
+- **Never retype word timings.** Import the `.words.json` that `media_transcribe` wrote (see `make`). A long list copied into a file is paid for twice.
+- **Long answers only when needed:** `allFiles` on `campaign_get` / `video_get`, `verbose` on jobs, `analysis.json` (the job already returns the pacing and the transcript), single frames with `media_view` (the sheet usually answers).
 
 ## Principles (set by the team; don't re-argue them)
 
