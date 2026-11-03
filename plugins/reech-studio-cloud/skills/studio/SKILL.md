@@ -1,7 +1,7 @@
 ---
 name: studio
 description: Start here for any Reech video work. Covers making a social or campaign video, reel, TikTok, Short, ad or podcast clip for any brand, and deciding which phase (gather, plan, make, learn) comes next. Use when the user mentions videos, content for a brand, a campaign, or Reech Studio.
-allowed-tools: mcp__reech-studio__me, mcp__reech-studio__brands_list, mcp__reech-studio__brand_get, mcp__reech-studio__campaign_get, mcp__reech-studio__video_get, mcp__reech-studio__file_get, mcp__reech-studio__library_search, mcp__reech-studio__activity, mcp__reech-studio__posts_list, mcp__reech-studio__locks_list, mcp__reech-studio__media_list, mcp__reech-studio__media_links, mcp__reech-studio__job_get, mcp__reech-studio__job_wait, mcp__reech-studio__jobs_list, mcp__reech-studio__lock_acquire, mcp__reech-studio__lock_release, mcp__reech-studio__media_view, mcp__reech-studio__media_upload_page, mcp__reech-studio__media_clips, mcp__reech-studio__media_read
+allowed-tools: mcp__reech-studio__me, mcp__reech-studio__brands_list, mcp__reech-studio__brand_get, mcp__reech-studio__campaign_get, mcp__reech-studio__video_get, mcp__reech-studio__file_get, mcp__reech-studio__library_search, mcp__reech-studio__activity, mcp__reech-studio__posts_list, mcp__reech-studio__locks_list, mcp__reech-studio__media_list, mcp__reech-studio__media_links, mcp__reech-studio__job_get, mcp__reech-studio__job_wait, mcp__reech-studio__jobs_list, mcp__reech-studio__lock_acquire, mcp__reech-studio__lock_release, mcp__reech-studio__media_view, mcp__reech-studio__media_upload_page, mcp__reech-studio__media_clips, mcp__reech-studio__media_read, mcp__reech-studio__media_clean
 ---
 
 # Reech Video Studio (cloud)
@@ -31,6 +31,7 @@ There are no files on this computer, no commands and nothing to install. Brands,
 | A brand's media; measure, transcribe, beat grid | `media_list`, `media_stats`, `media_transcribe`, `media_beats` |
 | Cut many short clips out of one long video (one job) | `media_clips` |
 | Read a document they gave (brand guidelines, brief, deck: PDF, Word, PowerPoint, text) | `media_read` |
+| Clean a recorded voice: remove background noise, enhance the voice | `media_clean` |
 | Break down a video someone shares; look at stored images | `media_analyze`, `media_view` |
 | Receive files from a person (give them the page), download media | `media_upload_page`, `media_links` |
 | Voice-over for a script (organizations with ElevenLabs) | `voices_list` to choose, `video_audio` |
