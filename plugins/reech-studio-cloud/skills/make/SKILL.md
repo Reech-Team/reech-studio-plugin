@@ -63,7 +63,7 @@ Write `config.ts` with `video_save` (`config`), copying the shape from an existi
    5. Anything unplanned: speech in the footage or another language, garbled text, artifacts, odd places, jumps? Is every planned sound layer actually audible (measured, not assumed)?
    6. The 3-second walk on the real render: where would a viewer leave?
    7. Does it look native to where it runs? Social (TikTok, Reels, Shorts) should look like the feed; a commercial can be cinematic. A social piece that looks like an ad fails this question.
-   Anything that fails: fix it and review the new render. Then show the person (the MP4 link); their reaction is the real verdict, and their corrections go into the brand's `writing.md` (for that brand) or to the team (for the playbook).
+   Anything that fails: fix it and review the new render. A passing review is all delivery needs: `video_deliver` reads `review.md` itself, so don't run `video_audit` again after writing it. Then show the person (the MP4 link); their reaction is the real verdict, and their corrections go into the brand's `writing.md` (for that brand) or to the team (for the playbook).
 
 ## 6. Deliver and log
 
