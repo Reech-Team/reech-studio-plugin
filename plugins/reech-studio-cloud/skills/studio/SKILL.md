@@ -1,7 +1,7 @@
 ---
 name: studio
 description: Start here for any Reech video work. Covers making a social or campaign video, reel, TikTok, Short, ad or podcast clip for any brand, and deciding which phase (gather, plan, make, learn) comes next. Use when the user mentions videos, content for a brand, a campaign, or Reech Studio.
-allowed-tools: mcp__reech-studio__me, mcp__reech-studio__brands_list, mcp__reech-studio__brand_get, mcp__reech-studio__campaign_get, mcp__reech-studio__video_get, mcp__reech-studio__file_get, mcp__reech-studio__library_search, mcp__reech-studio__activity, mcp__reech-studio__posts_list, mcp__reech-studio__locks_list, mcp__reech-studio__media_list, mcp__reech-studio__media_links, mcp__reech-studio__job_get, mcp__reech-studio__job_wait, mcp__reech-studio__jobs_list, mcp__reech-studio__lock_acquire, mcp__reech-studio__lock_release, mcp__reech-studio__media_view, mcp__reech-studio__media_upload_page
+allowed-tools: mcp__reech-studio__me, mcp__reech-studio__brands_list, mcp__reech-studio__brand_get, mcp__reech-studio__campaign_get, mcp__reech-studio__video_get, mcp__reech-studio__file_get, mcp__reech-studio__library_search, mcp__reech-studio__activity, mcp__reech-studio__posts_list, mcp__reech-studio__locks_list, mcp__reech-studio__media_list, mcp__reech-studio__media_links, mcp__reech-studio__job_get, mcp__reech-studio__job_wait, mcp__reech-studio__jobs_list, mcp__reech-studio__lock_acquire, mcp__reech-studio__lock_release, mcp__reech-studio__media_view, mcp__reech-studio__media_upload_page, mcp__reech-studio__media_clips
 ---
 
 # Reech Video Studio (cloud)
@@ -29,6 +29,7 @@ There are no files on this computer, no commands and nothing to install. Brands,
 | Any other text file (library guides, rules, research) | `file_get`, `file_put` (pass the etag you read), `log_append` for `.jsonl` logs |
 | The shared library (formats, styles, playbooks, hooks, rules, recipes, sfx, stock) | `library_search` |
 | A brand's media; measure, transcribe, beat grid | `media_list`, `media_stats`, `media_transcribe`, `media_beats` |
+| Cut many short clips out of one long video (one job) | `media_clips` |
 | Break down a video someone shares; look at stored images | `media_analyze`, `media_view` |
 | Receive files from a person (give them the page), download media | `media_upload_page`, `media_links` |
 | Voice-over for a script (organizations with ElevenLabs) | `voices_list` to choose, `video_audio` |
@@ -51,6 +52,12 @@ Everything a tool returns stays in the conversation and counts again on every la
 - **Never retype word timings.** Import the `.words.json` that `media_transcribe` wrote (see `make`). A long list copied into a file is paid for twice.
 - **Long answers only when needed:** `allFiles` on `campaign_get` / `video_get`, `verbose` on jobs, `analysis.json` (the job already returns the pacing and the transcript), single frames with `media_view` (the sheet usually answers).
 
+## Take what they bring, and execute
+
+People bring what they have: brand guidelines, a logo, example videos, footage, a long recording, goals, a deadline, or just a sentence. Take all of it in one go (`media_upload_page` for files; read links and text as given), file it where it belongs (`gather` section 3), and move on. Never ask for something you can find or reasonably infer.
+
+**"Just do it" mode.** When the person says to go ahead on their own ("hazlo", "ejecuta", "tú decide", "just make it", "no me preguntes"), or the brand's `system.json → autonomy` is `"auto"`, there are no stops at all: you choose the brand's look from their guidelines or site, the idea, the script, the voice and the music, render, check and deliver. Fill every gap yourself, then record each assumption where it lives (`source: "inferred"` on brand tokens and identity, `script.json → assumptions` for the video) and list them in two or three lines with the finished video, so the person can correct any of them next time. Facts are the only thing you never invent: a claim without a source is left out, not guessed.
+
 ## Principles (set by the team; don't re-argue them)
 
 - **Engagement over ads.** Posts entertain, educate or inform (or a mix). Success is saves, sends, comments, watch time. Storytelling means **cohesive composition** (voice, text, footage, sound all serving one promise), not a literal narrative.
@@ -58,7 +65,7 @@ Everything a tool returns stays in the conversation and counts again on every la
 - **Any kind of video.** Brand campaigns are one kind; teaching, entertainment, news, stories, opinion and anything new are others. `plan` follows the library playbook for the kind of video, and writes a new one when none fits.
 - **Library first, never locked in.** Search the library before building, then reuse, extend or create. Nothing is a default: the brief and the concept choose the format and style, not habit.
 - **Minimal human checkpoints.** Humans only do what Claude can't: hear voice and music quality once per brand, and watch the first finished video. After that, a brand runs autonomously as far as its `system.json → autonomy` allows. A video has at most three stops before it's delivered: what to make, which idea (only if you proposed ideas), and the script with its production choices (`plan` section 3). Never ask to approve stills, a proxy or the cut. The person can always ask to work differently.
-- **Never mix brands.** Everything about a brand lives under its own folders and is used only for that brand. The connector enforces it: a video's code may only use its own brand's files.
+- **Never mix brands.** Everything about a brand lives under its own folders and is used only for that brand. The connector enforces it: a video's code may only use its own brand's files. The one deliberate exception is a creator brand (`identity.kind: "creator"`, a person who works for several brands) that a brand lists in `system.talent` (see `gather`).
 - **Sources for facts.** Every factual claim in a script has a source; product claims only from the brand's own product page. Unverifiable numbers are left out.
 - **No legal/compliance rules built in.** If a team provides them, store them as brand or campaign context and follow them.
 - **Spend with care.** Previews (stills, proxies) are cheap; final renders count against the organization's monthly limit (`me` shows usage). Render once the script is approved and the stills pass your own look, and catch problems before the render (the voice-over check, the stills) so a video is rendered once.
