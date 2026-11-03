@@ -57,11 +57,11 @@ Everything a tool returns stays in the conversation and counts again on every la
 - **Ask, don't assume.** People hold different data, assets and guidelines. Never invent a brief, a claim or a brand rule. If something is missing, ask once, briefly, or research it and ask to confirm.
 - **Any kind of video.** Brand campaigns are one kind; teaching, entertainment, news, stories, opinion and anything new are others. `plan` follows the library playbook for the kind of video, and writes a new one when none fits.
 - **Library first, never locked in.** Search the library before building, then reuse, extend or create. Nothing is a default: the brief and the concept choose the format and style, not habit.
-- **Minimal human checkpoints.** Humans only do what Claude can't: hear voice and music quality once per brand, and watch the first finished video. After that, a brand runs autonomously as far as its `system.json → autonomy` allows. Don't add approval steps beyond the ones each playbook names. The person can always ask to work differently.
+- **Minimal human checkpoints.** Humans only do what Claude can't: hear voice and music quality once per brand, and watch the first finished video. After that, a brand runs autonomously as far as its `system.json → autonomy` allows. A video has at most three stops before it's delivered: what to make, which idea (only if you proposed ideas), and the script with its production choices (`plan` section 3). Never ask to approve stills, a proxy or the cut. The person can always ask to work differently.
 - **Never mix brands.** Everything about a brand lives under its own folders and is used only for that brand. The connector enforces it: a video's code may only use its own brand's files.
 - **Sources for facts.** Every factual claim in a script has a source; product claims only from the brand's own product page. Unverifiable numbers are left out.
 - **No legal/compliance rules built in.** If a team provides them, store them as brand or campaign context and follow them.
-- **Spend with care.** Previews (stills, proxies) are cheap; final renders count against the organization's monthly limit (`me` shows usage). Render only approved cuts.
+- **Spend with care.** Previews (stills, proxies) are cheap; final renders count against the organization's monthly limit (`me` shows usage). Render once the script is approved and the stills pass your own look, and catch problems before the render (the voice-over check, the stills) so a video is rendered once.
 
 ## Where things live (paths in Studio storage)
 
@@ -89,8 +89,8 @@ In a `config.ts`, media paths are relative to `media/` (`brands/<slug>/audio/<vi
 
 ## Picking the brand
 
-Work it out from the request, the open campaign, or the last brand worked on (`brands_list`, `brand_get`). If two could match, ask. Before writing anything, say in one line which brand and campaign you're working on, for example: `Dermohelp · 2026-10-spf-sun-awareness · news scan 3 days old`. Say you're editing with `lock_acquire` on the video folder so teammates see it.
+Work it out from the request, the open campaign, or the last brand worked on (`brands_list`, `brand_get`). If two could match, ask, and in the same question ask what they have in mind (a topic, an idea, or "suggest ideas"): one question, not two. Before writing anything, say in one line which brand and campaign you're working on, for example: `Dermohelp · 2026-10-spf-sun-awareness · news scan 3 days old`. Say you're editing with `lock_acquire` on the video folder so teammates see it.
 
 ## Commands
 
-`/reech-studio-cloud:brief` starts a campaign from a short conversation, `/reech-studio-cloud:approve` records an approval (script or cut) and moves on, `/reech-studio-cloud:deliver` runs render → checks → delivery for an approved cut.
+`/reech-studio-cloud:brief` starts a campaign from a short conversation, `/reech-studio-cloud:approve` records an approval (script or cut) and moves on, `/reech-studio-cloud:deliver` runs render → checks → delivery for a finished cut.

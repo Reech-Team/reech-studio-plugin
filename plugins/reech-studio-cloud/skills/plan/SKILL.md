@@ -42,7 +42,12 @@ The brand's `system/writing.md` (if it exists) wins over the playbook. Read it b
 
 ## 3. Checkpoints
 
-The playbook says where the person's input makes the video better (a pick, a back-and-forth, one look at the script). Use those, and no others, unless the person asked to work differently in step 1. When a step is a choice among options and `system.json → autonomy` is `"auto"`, make the choice yourself and say why in one line. `/reech-studio-cloud:approve` records the person's approval of a script.
+**At most three stops before the finished video**, unless the person asked to work differently in step 1. Every stop costs them a wait and a reply, so fold everything you need into these:
+1. **What to make:** the brand (only if it isn't clear) and what they have in mind, in one question. If they ask for ideas, the ideas come in your next reply.
+2. **Which idea:** only when you proposed ideas. Give each one its premise line, so the pick is already the angle.
+3. **The script:** the one review before money is spent. Show the script together with whatever the playbook asks the person to check before writing (the viewer's doubts, the angle, the comparison: put them next to the lines that answer them, not in a separate round), the facts and their sources, what is invented to illustrate, and the production choices still open (voice, music, length) with your recommendation for each. Ask once: "Does it work, or what should change?" Their answer approves the script and the choices you recommended.
+
+The playbook's checkpoints that come before the script are answered inside stop 3; don't hold a separate round for them. After stop 3 there are no more questions until delivery: don't ask to approve the cut, the stills or the render (`make` judges those), and only ask again when something truly needs the person (a file only they have, or a choice the brand system doesn't settle and you can't decide). When a step is a choice among options and `system.json → autonomy` is `"auto"`, make the choice yourself and say why in one line. `/reech-studio-cloud:approve` records the person's approval of a script.
 
 ## 4. Production plan (every kind of video)
 
