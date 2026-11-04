@@ -1,7 +1,7 @@
 {
   "name": "reech-studio-cloud",
   "displayName": "Reech Video Studio",
-  "version": "0.5.13",
+  "version": "0.5.14",
   "description": "Make social and campaign videos for your brands with Reech Studio in the cloud: gather context, plan and write, make (previews, render, checks) and learn from results. No files, no commands: everything runs through the Reech Studio connector.",
   "author": {
     "name": "Reech AI",
