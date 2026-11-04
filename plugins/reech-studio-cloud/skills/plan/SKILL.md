@@ -18,16 +18,35 @@ Don't assume it's a brand campaign. From what the person said, work out, and ask
 
 ## Analyze a video they share
 
-When someone shares a video ("analiza este video", "quiero uno como este"), work it out this way, with no checkpoint before the breakdown. Answer in their language.
+When someone shares a video ("analiza este video", "quiero uno como este", "hazlo igual"), work it out this way, with no checkpoint before the component list. Answer in their language. The goal is to recreate it as closely as possible, so never describe or promise a reference you haven't measured and looked at frame by frame: a few glances in a browser miss most of what makes it.
 
-1. **Get the file:** `media_upload_page` with the brand and `folder: "references"`. Send the link and wait. A link to a social post can't be read: ask for the file or a screen recording. Confirm it arrived with `media_list`.
-2. **Measure:** `media_analyze` with the path and, if known, `kind`, `language` and `source`. `job_wait` until done; it returns the contact sheet as an image plus the pacing and the transcript, which is usually enough. The full shot-by-shot data (`file_get` on `brands/<slug>/references/<id>/analysis.json`) is long: open it only for a question the sheet can't answer.
-3. **Look:** at the sheet, then `media_view` on `frames/first.jpg` (is the hook on screen at 0?) and only on the frames where the sheet leaves a doubt. Never describe a frame you haven't seen.
-4. **Read the context:** the job for the viewer, audience, offer and claims, the hook (catalog ids from `library_search` with `type: hook`), the structure with times, tone, voice, music role, CTA.
-5. **Read the design:** framing and camera per shot, on-screen text (font feel, size, position, when it lands), captions, colors, graphics, transitions, the rhythm of the cuts, and how the brand appears. Tie each thing to a moment.
-6. **Write it down, always, even for a recut of the brand's own video:** the next conversation starts from this. `file_put` needs the whole file, so put the `read` in `breakdown.md` rather than rewriting `analysis.json`. Keep it under 200 words: one-line summary, structure with times, the design, what to borrow, what won't transfer. It stays in this brand's folders; it never goes in the shared library.
-7. **Show it** in a few lines and ask what to keep. Then map it: the closest format and style from the library and how each design element is set in them. If something can't be built with what exists (a new layout or animation), say so plainly, offer the closest version, and tell them the team can build the rest.
-8. **Plan the new video** from their new context and assets with the normal flow below, recording the reference id in `script.json → references`.
+1. **Get the video**, in this order:
+   - **A link:** `media_analyze` with `url` (YouTube, TikTok, LinkedIn and most public posts download). If the job fails because the post needs a sign-in (Instagram usually does):
+   - **Record it in their browser** when Claude in Chrome is connected: it plays the post in their own signed-in Chrome and records it, sound included (the video's length in real time). Open the post in a new tab, then run in that tab (`javascript_tool`), replacing `<UPLOAD_PAGE>` with the `media_upload_page` link for this brand and `folder: "references"`, and `<NAME>` with a short name:
+     ```js
+     const v = [...document.querySelectorAll("video")].sort((a, b) => b.getBoundingClientRect().height - a.getBoundingClientRect().height).find((x) => x.getBoundingClientRect().top >= -10 && x.duration > 0);
+     v.pause(); v.loop = false; v.muted = true; v.currentTime = 0;
+     const mime = ["video/webm;codecs=vp9,opus", "video/webm"].find((m) => MediaRecorder.isTypeSupported(m));
+     const rec = new MediaRecorder(v.captureStream(), { mimeType: mime, videoBitsPerSecond: 8e6 }), parts = [];
+     rec.ondataavailable = (e) => e.data.size && parts.push(e.data);
+     window.__reech = { state: "recording", duration: v.duration };
+     rec.onstop = () => { const blob = new Blob(parts, { type: mime }); const w = window.open("<UPLOAD_PAGE>");
+       const send = () => w.postMessage({ type: "reech-recording", name: "<NAME>.webm", blob }, "*");
+       window.addEventListener("message", (e) => { if (e.data?.type === "reech-upload-ready") send(); if (e.data?.type === "reech-recording-received") window.__reech.state = "handed over"; });
+       window.__reech = { state: "waiting for the upload page", size: blob.size }; };
+     v.addEventListener("ended", () => rec.stop(), { once: true });
+     await new Promise((r) => (v.readyState >= 2 ? r() : v.addEventListener("canplay", r, { once: true })));
+     rec.start(1000); await v.play(); `recording ${Math.round(v.duration)} s`
+     ```
+     Wait the video's length, check `window.__reech.state`, then in the upload page's tab press the "Upload <name>" button (`find` it, then click) and wait for "Done". Then `media_analyze` with that path. The muted video still records its sound. This is the person watching a post they can see, like a screen recording; never use their account for anything else on that site.
+   - **Otherwise:** `media_upload_page` with `folder: "references"` and ask for the file (downloaded from the app, or a screen recording). Confirm it arrived with `media_list`.
+2. **Measure:** `media_analyze` with the path and, if known, `kind`, `language` and `source`. `job_wait` until done. It returns the old contact sheet, pacing and transcript, plus `visual`: layout spans (full frame or a box, what surrounds it, whether it changes inside the shot), the list of dense sheets (a frame every 0.5 s with its time) and change strips (frames around every layout change).
+3. **Look at all of it:** `media_view` on **every** dense sheet in order, then every change strip (up to 8 images per call). Most of what makes a reference (text that comes and goes, a sticker for half a second, a picture that slides, a collage building up) only shows there. Never describe a frame you haven't seen.
+4. **List every component** in `brands/<slug>/references/<id>/components.json` (`file_get` the draft, complete it, `file_put`): one entry per layout, text style (font feel, size, color, case, position, how it enters, how lines build up), graphic, sticker, image or clip slot, transition (cut, slide, scale), camera move, sound (music, effects) and anything else, each with its times and `match`: the library piece and the config that recreates it (`library_search`, the format's config type, the text looks in the make skill), or `"gap"` with what's missing. Keep the draft's measured entries and correct them where the frames disagree.
+5. **Read the context:** the job for the viewer, audience, offer and claims, the hook (catalog ids from `library_search` with `type: hook`), the structure with times, tone, voice, music role, CTA.
+6. **Write it down, always, even for a recut of the brand's own video:** `breakdown.md` (under 200 words: one-line summary, structure with times, the design, what to borrow) next to `components.json`. It stays in this brand's folders; it never goes in the shared library.
+7. **Ask for what the components need, then show the list before any script.** Many components need material the person has and we don't: photos or clips for a grid or collage around them, a pattern or image behind a box, stickers, a logo, a drawing. Always in this order: (1) **ask for theirs** first, saying what each piece shows in the reference (upload page, `folder` named after the video); (2) only if they have none, **stock** when the organization has it (`me` → flags), chosen to fit the brand and the moment; (3) only then **typographic cards** as placeholders (`cards` in the make skill: the key word of that moment as a designed tile in the brand's colors), named as placeholders in the component list so they can be swapped for real images later. Never hand-drawn shapes written as code, and never quietly drop a component for lack of material. Then show the list: what will match exactly, what will be close and how, and every gap with why. A gap is never the end of the road: the make skill says how to build a missing piece for this brand. Don't approve a script against a reference until the person has seen this list.
+8. **Plan the new video** from their new context and assets with the normal flow below, recording the reference id in `script.json → references`. In make, check the stills against the reference's dense frames at the same moments, component by component, before the render.
 
 Their own brand's video may be reused as footage if they say so (list it in `assets/index.json`). Someone else's video is inspiration only: its structure and techniques, never its footage, music or script.
 
