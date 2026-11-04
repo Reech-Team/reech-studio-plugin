@@ -48,7 +48,7 @@ There are no files on this computer, no commands and nothing to install. Brands,
 | The brand's saved video styles (to reuse) | `brand_get` → `style` |
 | Their dashboard (what needs them, every video's stage, brands, styles, a video's previews, rounds and cut, activity with undo) | `me` → `dashboard`, `dashboardVideo` |
 | Break down a video someone shares; look at stored images | `media_analyze`, `media_view` |
-| Receive files from a person (give them the page), download media | `media_upload_page`, `media_links` |
+| Upload a file you can read (their project folder) yourself; or give them the page to upload from their browser or phone; download media | `media_upload_links` + a PUT, `media_upload_page`, `media_links` |
 | Voice-over for a script (organizations with ElevenLabs) | `voices_list` to choose, `video_audio` |
 | Look at the video: frames, a low-res cut | `video_stills`, `video_proxy` |
 | Final render, checks, delivery | `video_render`, `video_qa`, `video_audit`, `video_deliver` |
