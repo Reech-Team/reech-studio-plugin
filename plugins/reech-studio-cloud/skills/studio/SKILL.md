@@ -59,6 +59,10 @@ Every heavy step returns a **job**: call `job_wait` (it waits up to 24 s on the 
 
 If the connector isn't connected, say so: the person adds it from the plugin (it asks them to sign in with their Reech Studio account, email + password or Google). Someone without an organization asks Reech to be added; there is no self sign-up.
 
+## Reviewers
+
+`me` → `role: "reviewer"` (someone a brand invites to check its videos, e.g. a client's marketing lead): they can read everything in their brands, make previews and frame sheets (`video_stills`, `video_proxy`), leave notes and approve rounds (`rounds.json`, their own items only); every other change or job is refused by the engine. With a reviewer, don't attempt edits, renders or uploads: show them the video (their dashboard link from `me`), take their notes into `rounds.json` in their words (`by` their email, `via: "dashboard"`, `status: "open"`), and tell them the team will make the changes. Admins set roles with `admin_user_set` (`role: "member" | "reviewer"`) or in the dashboard's Settings; a change takes effect within 5 minutes.
+
 ## Keep it light
 
 Everything a tool returns stays in the conversation and counts again on every later turn, and the person's Claude plan has a limit. Running out in the middle of a video is a failure of this work, so:
