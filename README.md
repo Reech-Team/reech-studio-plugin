@@ -8,4 +8,4 @@ Make social and campaign videos for your brands with Reech Studio: gather contex
 
 **Claude Code:** `/plugin install reech-studio-cloud --marketplace Reech-Team/reech-studio-plugin`, then sign in when the connector asks.
 
-You need a Reech Studio account to use it: organizations and members are created by Reech. Version 0.5.4.
+You need a Reech Studio account to use it: organizations and members are created by Reech. Version 0.5.5.
