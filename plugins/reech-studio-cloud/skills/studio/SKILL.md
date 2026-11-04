@@ -46,7 +46,7 @@ There are no files on this computer, no commands and nothing to install. Brands,
 | Clean a recorded voice: remove background noise, enhance the voice | `media_clean` |
 | The cut of a recording: a sheet to edit by sentence, or their own edit mapped onto the original | `media_cut` |
 | The brand's saved video styles (to reuse) | `brand_get` → `style` |
-| Their dashboard (brands, styles, a video's previews, rounds and cut, by hand) | `me` → `dashboard`, `dashboardVideo` |
+| Their dashboard (what needs them, every video's stage, brands, styles, a video's previews, rounds and cut, activity with undo) | `me` → `dashboard`, `dashboardVideo` |
 | Break down a video someone shares; look at stored images | `media_analyze`, `media_view` |
 | Receive files from a person (give them the page), download media | `media_upload_page`, `media_links` |
 | Voice-over for a script (organizations with ElevenLabs) | `voices_list` to choose, `video_audio` |
