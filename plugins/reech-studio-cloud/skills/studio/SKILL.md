@@ -46,6 +46,7 @@ There are no files on this computer, no commands and nothing to install. Brands,
 | Clean a recorded voice: remove background noise, enhance the voice | `media_clean` |
 | The cut of a recording: a sheet to edit by sentence, or their own edit mapped onto the original | `media_cut` |
 | Sounds that match what's said (a phone, water, a bell): Freesound for all, ElevenLabs as add-on | `media_sfx` |
+| A tweak after the first version (a word, a cut, a trim, a phrase, a sound, a size), checked and previewed in one call | `video_edit` |
 | The brand's saved video styles (to reuse) | `brand_get` → `style` |
 | Their dashboard (what needs them, every video's stage, brands, styles, a video's previews, rounds and cut, activity with undo) | `me` → `dashboard`, `dashboardVideo` |
 | Break down a video someone shares; look at stored images | `media_analyze`, `media_view` |
