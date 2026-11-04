@@ -35,7 +35,7 @@ Be honest about sample size: with fewer than about 5 posts per platform, report 
 
 ## 4. Update the brand
 
-- **The style's ficha** (`brands/<slug>/style/<name>/ficha.md`): every correction the person made on a real video becomes a rule in a dated section `## Learned in <video> (<date>)` at the end of the ficha ("text never on the board while it draws", "the wall is warm, the paper too"); a rule that holds for every style of the brand goes to section 0 of `style/catalog.md` instead. A style is `draft` until about three real videos have their corrections written; then set `status: "approved"` in its `look.json`. A rule that contradicts an earlier one replaces it and says why.
+- **The style's ficha** (`brands/<slug>/style/<name>/ficha.md`): every correction the person made on a real video becomes a rule in a dated section `## Learned in <video> (<date>)` at the end of the ficha ("text never on the board while it draws", "the wall is warm, the paper too"); a rule that holds for every style of the brand goes to section 0 of `style/catalog.md` instead. A style is saved (and reusable) from its first approved video (`make` §0c); after about three approved videos with their corrections written, set `status: "approved"` in its `look.json`. Results tell you which rules to trust: a rule from a video that performed well stays; one from a video that didn't is worth a question next time. A rule that contradicts an earlier one replaces it and says why.
 
 - `history.json` (`brand_save` with `history`, or `file_put`): add learned rules with evidence and date, retire phrases and insights that are worn out, and keep the rotation rule.
 - `system/system.json`: when a brand has about 5 posts with results and the team agrees, `autonomy` can move to `"auto"`.

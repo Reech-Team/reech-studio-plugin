@@ -15,6 +15,18 @@ A system for making videos for **any brand or purpose** in four phases. Each pha
 | 3. Make | `make` | Audio, footage, the edit, previews, render, checks, delivery, logged post |
 | 4. Learn | `learn` | Results linked to what was made; brand rules updated |
 
+## The journey: collaborate once, then reuse and go faster
+
+What the person lives through, whichever phase you're in. The first video builds their style with them; every later one starts from it.
+
+1. **They start however they want:** "make me a video like this" (one reference is normal, several is a bonus), a description of what they want, or just their recording. Take what they bring; never send them looking for more references.
+2. **You ask the few questions a reference can't answer, then propose** (`gather` → style intake): what they like and dislike in what they showed, what the viewer should feel, what's on screen from the first second, what must never happen. A brand's first video: two short proposals on their real script, with sound, to pick from (`make` §0).
+3. **The cut is theirs** (`make` → The cut): they cut it in their app, decide it with you sentence by sentence, or you propose and they correct.
+4. **Editing rounds:** previews with sound, their corrections, the next preview. Each round is numbered and recorded in the video's `rounds.json` (`make` → Editing rounds), so "go back to round 2" works and nothing they said is lost.
+5. **Approved → their style is saved** (`make` → Save the style): the moment they approve a final, the look, the rules from their corrections and the stills become `brands/<slug>/style/<name>/`, ready to reuse. Tell them its name.
+6. **Reuse:** "use my style" (`brand_get` → `style.styles`) skips the intake and the two proposals: cut, highlights, build from the style, one preview round. "My style but…" changes that one video; if they like the change, save it as a variant.
+7. **It gets faster:** every approved video adds its rules to the style; by the third or fourth video, "here's my recording, use my style" should be one round.
+
 Learn feeds the next Gather and Plan for that brand. Go in order, but skip what's already known: a brand that's onboarded with an open campaign and a fresh scan goes straight to Plan, and someone who already brings a topic or idea doesn't need a scan unless the playbook uses one.
 
 ## Everything happens through the Reech Studio connector
@@ -32,6 +44,8 @@ There are no files on this computer, no commands and nothing to install. Brands,
 | Cut many short clips out of one long video (one job) | `media_clips` |
 | Read a document they gave (brand guidelines, brief, deck: PDF, Word, PowerPoint, text) | `media_read` |
 | Clean a recorded voice: remove background noise, enhance the voice | `media_clean` |
+| The cut of a recording: a sheet to edit by sentence, or their own edit mapped onto the original | `media_cut` |
+| The brand's saved video styles (to reuse) | `brand_get` → `style` |
 | Break down a video someone shares; look at stored images | `media_analyze`, `media_view` |
 | Receive files from a person (give them the page), download media | `media_upload_page`, `media_links` |
 | Voice-over for a script (organizations with ElevenLabs) | `voices_list` to choose, `video_audio` |
