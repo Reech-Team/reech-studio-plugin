@@ -1,7 +1,7 @@
 ---
 name: studio
 description: Start here for any Reech video work. Covers making a social or campaign video, reel, TikTok, Short, ad or podcast clip for any brand, and deciding which phase (gather, plan, make, learn) comes next. Use when the user mentions videos, content for a brand, a campaign, or Reech Studio.
-allowed-tools: mcp__reech-studio__me, mcp__reech-studio__brands_list, mcp__reech-studio__brand_get, mcp__reech-studio__campaign_get, mcp__reech-studio__video_get, mcp__reech-studio__file_get, mcp__reech-studio__library_search, mcp__reech-studio__activity, mcp__reech-studio__posts_list, mcp__reech-studio__locks_list, mcp__reech-studio__media_list, mcp__reech-studio__media_links, mcp__reech-studio__job_get, mcp__reech-studio__job_wait, mcp__reech-studio__jobs_list, mcp__reech-studio__lock_acquire, mcp__reech-studio__lock_release, mcp__reech-studio__media_view, mcp__reech-studio__media_upload_page, mcp__reech-studio__media_clips, mcp__reech-studio__media_read, mcp__reech-studio__media_clean
+allowed-tools: mcp__reech-studio__me, mcp__reech-studio__brands_list, mcp__reech-studio__brand_get, mcp__reech-studio__campaign_get, mcp__reech-studio__video_get, mcp__reech-studio__video_state, mcp__reech-studio__file_get, mcp__reech-studio__library_search, mcp__reech-studio__activity, mcp__reech-studio__posts_list, mcp__reech-studio__locks_list, mcp__reech-studio__media_list, mcp__reech-studio__media_links, mcp__reech-studio__job_get, mcp__reech-studio__job_wait, mcp__reech-studio__jobs_list, mcp__reech-studio__lock_acquire, mcp__reech-studio__lock_release, mcp__reech-studio__media_view, mcp__reech-studio__media_upload_page, mcp__reech-studio__media_clips, mcp__reech-studio__media_read, mcp__reech-studio__media_clean, mcp__reech-studio__craft_list
 ---
 
 # Reech Video Studio (cloud)
@@ -37,6 +37,7 @@ There are no files on this computer, no commands and nothing to install. Brands,
 |---|---|
 | Who am I, which organization, what's enabled, usage against limits | `me` |
 | Brands, one brand, a campaign, a video | `brands_list`, `brand_get`, `campaign_get`, `video_get` |
+| A video's current state before an edit round (spoken words with indices, aspects, live edits, what can change) | `video_state` |
 | Create or change a brand, campaign, video (shape-checked, etag-safe) | `brand_save`, `campaign_save`, `video_save` |
 | Any other text file (library guides, rules, research) | `file_get`, `file_put` (pass the etag you read), `log_append` for `.jsonl` logs |
 | The shared library (formats, styles, playbooks, hooks, rules, recipes, sfx, stock) | `library_search` |
@@ -48,6 +49,7 @@ There are no files on this computer, no commands and nothing to install. Brands,
 | Sounds that match what's said (a phone, water, a bell): Freesound for all, ElevenLabs as add-on | `media_sfx` |
 | A tweak after the first version (a word, a cut, a trim, a phrase, a sound, a size), checked and previewed in one call | `video_edit` |
 | The brand's saved video styles (to reuse) | `brand_get` → `style` |
+| What the organization learned across its brands (craft lessons from rounds and references; validated ones act as defaults) | `craft_list`, `craft_record`, `craft_propose`, `craft_promote` |
 | Their dashboard (what needs them, every video's stage, brands, styles, a video's previews, rounds and cut, activity with undo) | `me` → `dashboard`, `dashboardVideo` |
 | Break down a video someone shares; look at stored images | `media_analyze`, `media_view` |
 | Upload a file you can read (their project folder) yourself; or give them the page to upload from their browser or phone; download media | `media_upload_links` + a PUT, `media_upload_page`, `media_links` |
