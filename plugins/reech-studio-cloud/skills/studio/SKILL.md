@@ -47,6 +47,9 @@ There are no files on this computer, no commands and nothing to install. Brands,
 | Clean a recorded voice: remove background noise, enhance the voice | `media_clean` |
 | The cut of a recording: a sheet to edit by sentence, or their own edit mapped onto the original | `media_cut` |
 | Sounds that match what's said (a phone, water, a bell): Freesound for all, ElevenLabs as add-on | `media_sfx` |
+| Free stock photos and videos for generic moments (Pexels, then Pixabay) | `media_stock` |
+| Every shot of their footage described once (the footage log), before deciding how to make the video | `media_log` |
+| The 2–3 directions proposed before the build, the pick and the critique | `video_save` → `treatment` (plan §1b, make §5b) |
 | A tweak after the first version (a word, a cut, a trim, a phrase, a sound, a size), checked and previewed in one call | `video_edit` |
 | The brand's saved video styles (to reuse) | `brand_get` → `style` |
 | What the organization learned across its brands (craft lessons from rounds and references; validated ones act as defaults) | `craft_list`, `craft_record`, `craft_propose`, `craft_promote` |
