@@ -150,6 +150,17 @@ Write `config.ts` with `video_save` (`config`), copying the shape from an existi
 
 **Look before rendering:** `video_stills` (default 8 spread frames; ask for `times` at the hook, every card and the CTA), then `job_wait`: the contact sheet comes back as an image. Look at it: safe zones, text size, that frame 0 already shows the hook, that footage and text match the script. `video_proxy` (a 540p cut, `from`/`to` in seconds) for motion, timing and sound; give the person the link when their eyes help. A proxy is a half-size preview and its link lasts an hour: say so, and don't call the video finished until it has been rendered and delivered. Fix the config and look again; iterate here, not on final renders. After a fix, ask stills only for the `times` it touched. **You approve the cut:** the person approved the script in `plan`, so when the stills pass your look, render. Don't stop to ask them about stills or a proxy unless they asked to see one.
 
+## 4c. The motion kit: the effects of an advanced edit (format `creator`)
+
+Nine library layers any video places by name in `layers` (no `components` export; `library_search "motion kit"`, then `file_get` an entry's manifest for its props). Each is brand-neutral and takes its colors from props: color them with the brand. They are what made a laptop brand's reel and a creator's video read as high-end on 2026-11-14:
+- **Story devices:** `GlassNotification` (a phone notification that slides down: meetings, reminders, "listo ✓") and `LiveCard` (a live device card with a pulsing dot and a sound wave: a baby monitor, a call; repeat it with a new status to tell a night or a process). Keep them off the face: top in wide shots, bottom (`y` about 0.74) in close-ups. One at a time, each with its sound cue.
+- **Big words:** `SlideWords` (slides across while said, motion blur) and `DropWords` (letters drop in, a drawn underline). For the hook and one or two key phrases, not every line; the small captions spread left and right carry the rest (`phrases` with `x`, `w`, `align`, `build: "all"`, `enter: "none"`).
+- **Transitions with a reason:** `PanelWipe` (the next shot in vertical panels) and `CircleReveal` (the next shot opens in a circle). At the turn or the reveal, with a whoosh or sparkle; they cover the picture with their clip while the voice continues (`layer: "over-picture"`).
+- **Time passing:** `ClockSweep` (hands sweep `fromH` → `toH`, the face goes from night to morning).
+- **Grade that tells the story:** `MoodGrade` (teal shadows, warm highlights, grain, vignette) or `NightGrade` (night with a glow around lights; `morning: true` for the answer). Put them on `layer: "over-picture"` so text stays clean, set `brand: { ...brand, style: "clean" }`, and change grade at the turn (two layers that meet there).
+- **Framing:** a person far from the camera needs framings of their own: `angles` and `shots` take `{ zoom, x, y, rotate }` around the point kept in place (a 4K full-body take: face about `{ zoom: 2.6, x: 0.5, y: 0.2 }`, chest `{ zoom: 1.85, y: 0.27 }`). Without them every shot looks the same.
+- Check the stills around each layer: a card over a face or a word under a card only shows there.
+
 ## 5. Render and the checks
 
 1. **`video_render`** when the stills pass (`lufs: -14` for social; the default −16 is for long-form). It counts against the organization's monthly renders. `job_wait` returns the MP4 link, the file `name` and the report (frames, loudness, delivery checks); a report with blocking problems fails the job: read the error.
