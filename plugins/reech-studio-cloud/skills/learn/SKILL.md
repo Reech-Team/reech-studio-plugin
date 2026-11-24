@@ -43,7 +43,7 @@ Be honest about sample size: with fewer than about 5 posts per platform, report 
 
 ## 4b. The craft store: lessons that repeat become defaults
 
-Every `scope: "style"` round item and every craft choice the person judged on a reference is in the organization's craft store (`make` §0b step 6, `plan` "Analyze a video they share"), brand-neutral and shared by all its brands. Learn turns the ones that keep coming back into something that acts.
+Every `scope: "style"` round item and every craft choice the person judged on a reference is in the organization's craft store (`make-rounds` step 6, `plan` "Analyze a video they share"), brand-neutral and shared by all its brands. Learn turns the ones that keep coming back into something that acts.
 1. **Catch up:** in the videos this Learn covers, any `scope: "style"` item in `rounds.json` without `craft` was missed: `craft_record` it now (brand-neutral, `source.kind: "round"`), then mark the item.
 2. **Read the clusters:** `craft_list` (no filter). `clusters` groups the same lesson said in different words, rounds and brands; `ready` says which have enough evidence: **`to: "validated"`** when a candidate came back from 2+ brands, 3+ rounds or 2+ references (or a reference and a round agree); **`to: "promote"`** when a validated lesson held across 3+ brands or 5+ rounds. Results weigh in: a lesson from videos that performed well is stronger; one from a video that flopped is a question, not a default.
 3. **Propose, the person decides:** for each ready cluster, `craft_propose` with all its `ids`, one brand-neutral wording (`lesson`), the evidence as `reason`, and for a promotion how it acts (`acts`):
